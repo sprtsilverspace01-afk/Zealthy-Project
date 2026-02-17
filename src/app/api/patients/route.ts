@@ -56,8 +56,11 @@ export async function POST(request: NextRequest) {
       email: patient.email,
       message: 'Patient registered successfully'
     }, { status: 201 })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Patient creation error:', error)
-    return NextResponse.json({ error: 'Failed to create patient' }, { status: 500 })
+    return NextResponse.json({ 
+      error: 'Failed to create patient',
+      details: error.message 
+    }, { status: 500 })
   }
 }
